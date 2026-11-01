@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI CỦA HÀO</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#0b1020;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:18px;
+ background:#151d32;
+ border-bottom:1px solid #26334d;
+ font-size:22px;
+ font-weight:bold;
+}
+header span{color:#54a6ff}
+main{
+ max-width:750px;
+ margin:auto;
+ padding:15px;
+ padding-bottom:110px;
+}
+#welcome{
+ text-align:center;
+ margin-top:100px;
+}
+#welcome h1{font-size:30px}
+#welcome p{color:#aab5ca}
+#messages{
+ display:flex;
+ flex-direction:column;
+ gap:15px;
+}
+.message{
+ padding:13px 16px;
+ border-radius:15px;
+ max-width:88%;
+ line-height:1.5;
+ white-space:pre-wrap;
+}
+.user{
+ background:#2463bd;
+ align-self:flex-end;
+}
+.ai{
+ background:#1b2942;
+ align-self:flex-start;
+}
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:12px;
+ background:#0b1020;
+ border-top:1px solid #26334d;
+}
+.inputbox{
+ max-width:750px;
+ margin:auto;
+ display:flex;
+ gap:8px;
+}
+input{
+ flex:1;
+ min-width:0;
+ padding:15px;
+ border-radius:14px;
+ border:1px solid #34435f;
+ background:#18233a;
+ color:white;
+ font-size:16px;
+ outline:none;
+}
+button{
+ border:0;
+ border-radius:13px;
+ background:#3988ed;
+ color:white;
+ padding:0 19px;
+ font-size:17px;
+}
+</style>
+</head>
+<body>
+<header>✦ AI <span>CỦA HÀO</span></header>
+<main>
+ <div id="welcome">
+  <h1>Xin chào! 👋</h1>
+  <p>Tôi là AI CỦA HÀO. Bạn muốn hỏi điều gì?</p>
+ </div>
+ <div id="messages"></div>
+</main>
+<div class="bottom">
+ <div class="inputbox">
+  <input id="question" placeholder="Nhắn tin cho AI..." autocomplete="off">
+  <button onclick="sendMessage()">➤</button>
+ </div>
+</div>
+<script>
+function sendMessage(){
+ const input=document.getElementById("question");
+ const text=input.value.trim();
+ if(!text)return;
+ document.getElementById("welcome").style.display="none";
+ const messages=document.getElementById("messages");
+ const user=document.createElement("div");
+ user.className="message user";
+ user.textContent=text;
+ messages.appendChild(user);
+ const ai=document.createElement("div");
+ ai.className="message ai";
+ ai.textContent="Xin chào! Tôi đã nhận được câu hỏi của bạn. Hiện tại tôi chưa được kết nối với mô hình AI.";
+ messages.appendChild(ai);
+ input.value="";
+ window.scrollTo(0,document.body.scrollHeight);
+}
+document.getElementById("question").addEventListener("keydown",function(e){
+ if(e.key==="Enter")sendMessage();
+});
+</script>
+</body>
+</html>
